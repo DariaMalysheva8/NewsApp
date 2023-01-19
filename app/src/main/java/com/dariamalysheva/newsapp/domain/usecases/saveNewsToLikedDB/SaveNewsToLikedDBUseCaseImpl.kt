@@ -1,0 +1,12 @@
+package com.dariamalysheva.newsapp.domain.usecases.saveNewsToLikedDB
+
+import com.dariamalysheva.newsapp.domain.repository.NewsRepository
+
+class SaveNewsToLikedDBUseCaseImpl(
+    private val repository: NewsRepository
+) : SaveNewsToLikedDBUseCase {
+
+    override suspend operator fun invoke(id: String) {
+        repository.saveNewsToLikedDB(id)
+    }
+}

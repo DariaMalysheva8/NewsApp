@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">NewsApp</string>
+
+    <string name="language_dialog_title">Please select a language</string>
+    <string name="region_dialog_title">Please select a region</string>
+    <string name="category_dialog_title">Please select a category</string>
+    <string name="action_confirm">OK</string>
+
+    <string name="news_rv_item_view_like_button_description">Like button</string>
+
+</resources>

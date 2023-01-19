@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/miLanguage"
+        android:icon="@drawable/ic_language"
+        android:title="Language"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/miRegion"
+        android:icon="@drawable/ic_region"
+        android:title="Region"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/miCategory"
+        android:icon="@drawable/ic_filter"
+        android:title="Category"
+        app:showAsAction="always" />
+
+</menu>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/miLatestNews"
+        android:icon="@drawable/ic_bolt"
+        android:title="Latest News" />
+
+    <item
+        android:id="@+id/miSearch"
+        android:icon="@drawable/ic_search"
+        android:title="Search" />
+
+    <item
+        android:id="@+id/miLikes"
+        android:icon="@drawable/ic_likes"
+        android:title="Likes" />
+</menu>
