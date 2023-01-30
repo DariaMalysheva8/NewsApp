@@ -94,4 +94,9 @@ class LikedNewsFragment : Fragment() {
             viewModel.deleteNewsToLikeDb(newsVoId)
         }
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
 }

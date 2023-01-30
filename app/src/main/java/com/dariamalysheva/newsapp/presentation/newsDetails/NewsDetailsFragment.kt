@@ -47,6 +47,11 @@ class NewsDetailsFragment : Fragment() {
         newsUrl = args.getString(NEWS_URL).toString()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
     companion object {
 
         private const val NEWS_URL = "NEWS_URL"

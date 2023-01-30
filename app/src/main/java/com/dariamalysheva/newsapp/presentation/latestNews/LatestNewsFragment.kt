@@ -196,6 +196,11 @@ class LatestNewsFragment : Fragment() {
         return map.filter { target == it.value }.keys.first()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
     companion object {
 
         private const val FROM_NETWORK = "FROM_NETWORK"
