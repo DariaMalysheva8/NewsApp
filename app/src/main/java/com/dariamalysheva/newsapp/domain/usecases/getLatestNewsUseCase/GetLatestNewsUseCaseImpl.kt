@@ -2,8 +2,9 @@ package com.dariamalysheva.newsapp.domain.usecases.getLatestNewsUseCase
 
 import com.dariamalysheva.newsapp.domain.entity.News
 import com.dariamalysheva.newsapp.domain.repository.NewsRepository
+import javax.inject.Inject
 
-class GetLatestNewsUseCaseImpl(
+class GetLatestNewsUseCaseImpl @Inject constructor(
     private val repository: NewsRepository
 ) : GetLatestNewsUseCase {
 

@@ -2,8 +2,9 @@ package com.dariamalysheva.newsapp.domain.usecases.getSearchNewsUsingOptions
 
 import com.dariamalysheva.newsapp.domain.entity.News
 import com.dariamalysheva.newsapp.domain.repository.NewsRepository
+import javax.inject.Inject
 
-class GetSearchSearchNewsUsingOptionsUseCaseImpl(
+class GetSearchSearchNewsUsingOptionsUseCaseImpl @Inject constructor(
     private val repository: NewsRepository
 ) : GetSearchNewsUsingOptionsUseCase {
 

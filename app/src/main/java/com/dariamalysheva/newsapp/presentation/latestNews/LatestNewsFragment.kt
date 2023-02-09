@@ -19,10 +19,13 @@ import com.dariamalysheva.newsapp.common.utils.constants.Constants.Companion.REG
 import com.dariamalysheva.newsapp.common.utils.extensions.navigateToFragment
 import com.dariamalysheva.newsapp.databinding.FragmentLatestNewsBinding
 import com.dariamalysheva.newsapp.domain.entity.toNewsVO
+import com.dariamalysheva.newsapp.presentation.NewsApp
+import com.dariamalysheva.newsapp.presentation.common.ViewModelFactory
 import com.dariamalysheva.newsapp.presentation.common.dialog.LanguageDialogFragment
 import com.dariamalysheva.newsapp.presentation.common.dialog.RegionDialogFragment
 import com.dariamalysheva.newsapp.presentation.common.recyclerview.NewsAdapter
 import com.dariamalysheva.newsapp.presentation.newsDetails.NewsDetailsFragment
+import javax.inject.Inject
 
 class LatestNewsFragment : Fragment() {
 
@@ -34,8 +37,15 @@ class LatestNewsFragment : Fragment() {
         NewsAdapter()
     }
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
     private val viewModel: LatestNewsViewModel by lazy {
-        ViewModelProvider(this)[LatestNewsViewModel::class.java]
+        ViewModelProvider(this, viewModelFactory)[LatestNewsViewModel::class.java]
+    }
+
+    private val component by lazy {
+        (requireActivity().application as NewsApp).component
     }
 
     private val preferences: SharedPreferences by lazy {
@@ -43,6 +53,11 @@ class LatestNewsFragment : Fragment() {
     }
     private var languageCode: String? = null
     private var regionCode: String? = null
+
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

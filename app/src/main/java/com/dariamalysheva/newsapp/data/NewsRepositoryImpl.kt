@@ -1,25 +1,26 @@
 package com.dariamalysheva.newsapp.data
 
-import android.app.Application
 import com.dariamalysheva.newsapp.common.utils.constants.Constants
-import com.dariamalysheva.newsapp.data.database.room.database.AppDatabase
+import com.dariamalysheva.newsapp.data.database.room.dao.NewsDao
 import com.dariamalysheva.newsapp.data.database.room.entities.toLikedNewsDB
 import com.dariamalysheva.newsapp.data.database.room.entities.toNews
-import com.dariamalysheva.newsapp.data.network.retrofit.clients.NewsClient
 import com.dariamalysheva.newsapp.data.network.retrofit.models.toNews
+import com.dariamalysheva.newsapp.data.network.retrofit.services.NewsApiService
 import com.dariamalysheva.newsapp.domain.entity.News
 import com.dariamalysheva.newsapp.domain.entity.toLatestNewsDB
 import com.dariamalysheva.newsapp.domain.entity.toSearchNewsDB
 import com.dariamalysheva.newsapp.domain.repository.NewsRepository
+import javax.inject.Inject
 
-class NewsRepositoryImpl(application: Application) : NewsRepository {
-
-    private val newsDao = AppDatabase.getDatabase(application).getNewsDao()
+class NewsRepositoryImpl @Inject constructor(
+    private val newsDao: NewsDao,
+    private val apiService: NewsApiService
+) : NewsRepository {
 
     override suspend fun getLatestNewsFromNetwork(language: String?, region: String?): List<News> {
 
         return try {
-            NewsClient.retrofit.getNews(
+            apiService.getNews(
                 language = language,
                 country = region,
                 apiKey = Constants.API_KEY
@@ -103,7 +104,7 @@ class NewsRepositoryImpl(application: Application) : NewsRepository {
     ): List<News> {
 
         return try {
-            NewsClient.retrofit.searchNews(
+            apiService.searchNews(
                 apiKey = Constants.API_KEY,
                 options
             ).news.map { newsNetwork ->

@@ -1,31 +1,23 @@
 package com.dariamalysheva.newsapp.presentation.latestNews
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.dariamalysheva.newsapp.data.NewsRepositoryImpl
 import com.dariamalysheva.newsapp.domain.entity.News
 import com.dariamalysheva.newsapp.domain.usecases.deleteNewsFromLikedDb.DeleteNewsFromLikedDBUseCase
-import com.dariamalysheva.newsapp.domain.usecases.deleteNewsFromLikedDb.DeleteNewsFromLikedDBUseCaseImpl
 import com.dariamalysheva.newsapp.domain.usecases.getLatestNewsUseCase.GetLatestNewsUseCase
-import com.dariamalysheva.newsapp.domain.usecases.getLatestNewsUseCase.GetLatestNewsUseCaseImpl
 import com.dariamalysheva.newsapp.domain.usecases.saveNewsToLikedDB.SaveNewsToLikedDBUseCase
-import com.dariamalysheva.newsapp.domain.usecases.saveNewsToLikedDB.SaveNewsToLikedDBUseCaseImpl
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class LatestNewsViewModel(application: Application) : AndroidViewModel(application) {
-
-    private val repository = NewsRepositoryImpl(application)
-
-    private val getLatestNewsUseCase: GetLatestNewsUseCase = GetLatestNewsUseCaseImpl(repository)
-    private val saveNewsToLikedDBUseCase: SaveNewsToLikedDBUseCase =
-        SaveNewsToLikedDBUseCaseImpl(repository)
-    private val deleteNewsFromLikedDBUseCase: DeleteNewsFromLikedDBUseCase =
-        DeleteNewsFromLikedDBUseCaseImpl(repository)
+class LatestNewsViewModel @Inject constructor(
+    private val getLatestNewsUseCase: GetLatestNewsUseCase,
+    private val saveNewsToLikedDBUseCase: SaveNewsToLikedDBUseCase,
+    private val deleteNewsFromLikedDBUseCase: DeleteNewsFromLikedDBUseCase
+) : ViewModel() {
 
     private val _loading = MutableLiveData<Boolean>(false)
     val loading: LiveData<Boolean>

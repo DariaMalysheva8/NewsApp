@@ -1,5 +1,6 @@
 package com.dariamalysheva.newsapp.presentation.likedNews
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,8 +13,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.dariamalysheva.newsapp.common.utils.extensions.navigateToFragment
 import com.dariamalysheva.newsapp.databinding.FragmentLikedNewsBinding
 import com.dariamalysheva.newsapp.domain.entity.toNewsVO
+import com.dariamalysheva.newsapp.presentation.NewsApp
+import com.dariamalysheva.newsapp.presentation.common.ViewModelFactory
 import com.dariamalysheva.newsapp.presentation.common.recyclerview.NewsAdapter
 import com.dariamalysheva.newsapp.presentation.newsDetails.NewsDetailsFragment
+import javax.inject.Inject
 
 class LikedNewsFragment : Fragment() {
 
@@ -25,8 +29,20 @@ class LikedNewsFragment : Fragment() {
         NewsAdapter()
     }
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
     private val viewModel: LikedNewsViewModel by lazy {
-        ViewModelProvider(this)[LikedNewsViewModel::class.java]
+        ViewModelProvider(this, viewModelFactory)[LikedNewsViewModel::class.java]
+    }
+
+    private val component by lazy {
+        (requireActivity().application as NewsApp).component
+    }
+
+    override fun onAttach(context: Context) {
+        component.inject(this)
+        super.onAttach(context)
     }
 
     override fun onCreateView(

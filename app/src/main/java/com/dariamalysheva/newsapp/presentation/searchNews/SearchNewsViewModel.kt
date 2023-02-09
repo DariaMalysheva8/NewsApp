@@ -1,32 +1,23 @@
 package com.dariamalysheva.newsapp.presentation.searchNews
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.dariamalysheva.newsapp.data.NewsRepositoryImpl
 import com.dariamalysheva.newsapp.domain.entity.News
 import com.dariamalysheva.newsapp.domain.usecases.deleteNewsFromLikedDb.DeleteNewsFromLikedDBUseCase
-import com.dariamalysheva.newsapp.domain.usecases.deleteNewsFromLikedDb.DeleteNewsFromLikedDBUseCaseImpl
 import com.dariamalysheva.newsapp.domain.usecases.getSearchNewsUsingOptions.GetSearchNewsUsingOptionsUseCase
-import com.dariamalysheva.newsapp.domain.usecases.getSearchNewsUsingOptions.GetSearchSearchNewsUsingOptionsUseCaseImpl
 import com.dariamalysheva.newsapp.domain.usecases.saveNewsToLikedDB.SaveNewsToLikedDBUseCase
-import com.dariamalysheva.newsapp.domain.usecases.saveNewsToLikedDB.SaveNewsToLikedDBUseCaseImpl
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class SearchNewsViewModel(application: Application) : AndroidViewModel(application) {
-
-    private val repository = NewsRepositoryImpl(application)
-
-    private val getSearchNewsUsingOptionsUseCase: GetSearchNewsUsingOptionsUseCase =
-        GetSearchSearchNewsUsingOptionsUseCaseImpl(repository)
-    private val saveNewsToLikedDBUseCase: SaveNewsToLikedDBUseCase =
-        SaveNewsToLikedDBUseCaseImpl(repository)
-    private val deleteNewsFromLikedDBUseCase: DeleteNewsFromLikedDBUseCase =
-        DeleteNewsFromLikedDBUseCaseImpl(repository)
+class SearchNewsViewModel @Inject constructor(
+    private val getSearchNewsUsingOptionsUseCase: GetSearchNewsUsingOptionsUseCase,
+    private val saveNewsToLikedDBUseCase: SaveNewsToLikedDBUseCase,
+    private val deleteNewsFromLikedDBUseCase: DeleteNewsFromLikedDBUseCase,
+) : ViewModel() {
 
     private val _listOfNews = MutableLiveData<List<News>>()
     val listOfNews: LiveData<List<News>>
