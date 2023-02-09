@@ -13,6 +13,7 @@ Hello, welcome to my news application. You can choose language and region and al
 8. ViewBinding
 9. Swipe refresh layout (pull to refresh)
 10. WebView
+11. Dagger2
 ## Экраны приложения / App screens
 ![latest news screen](https://user-images.githubusercontent.com/114177063/212946988-13c1ffa0-7a25-4587-9353-288826b2f535.png)
 ![search news screen](https://user-images.githubusercontent.com/114177063/212947023-6c550c4e-e94c-45bc-931d-ebda8607349f.png)
